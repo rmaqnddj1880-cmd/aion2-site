@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>아이온2 공략 — AION2 FAN SITE</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c9a84c;
+    --gold-light: #f0d080;
+    --blue: #4fc3f7;
+    --blue-glow: #0096c7;
+    --dark: #060a12;
+    --dark2: #0d1524;
+    --dark3: #111d30;
+    --text: #d0dce8;
+    --text-dim: #7a92a8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'Noto Sans KR', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ── PARTICLES ── */
+  #particles {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle linear infinite;
+    opacity: 0;
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: 0; }
+    50% { opacity: 0.6; }
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: fixed;
+    top: 0; width: 100%;
+    z-index: 100;
+    background: linear-gradient(180deg, rgba(6,10,18,0.98) 0%, rgba(6,10,18,0.7) 100%);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+  }
+  nav { display: flex; gap: 6px; }
+  nav a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.5px;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+  nav a:hover {
+    color: var(--gold-light);
+    background: rgba(201,168,76,0.1);
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 20px 60px;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(13,21,36,0.0) 0%, rgba(6,10,18,1) 70%),
+      linear-gradient(180deg, #060a12 0%, #0d1524 50%, #060a12 100%);
+    z-index: 1;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(circle 600px at 20% 50%, rgba(79,195,247,0.04) 0%, transparent 70%),
+      radial-gradient(circle 600px at 80% 30%, rgba(201,168,76,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 5px;
+    color: var(--blue);
+    margin-bottom: 20px;
+    opacity: 0.8;
+  }
+  .hero h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.8rem, 8vw, 5.5rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: 8px;
+    background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold) 60%, #8a6820 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+    animation: fadeUp 1s ease both;
+  }
+  .hero h2 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1rem, 3vw, 1.8rem);
+    font-weight: 400;
+    letter-spacing: 12px;
+    color: var(--blue);
+    margin-bottom: 30px;
+    animation: fadeUp 1s 0.2s ease both;
+    opacity: 0.9;
+  }
+  .hero p {
+    max-width: 480px;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    animation: fadeUp 1s 0.4s ease both;
+  }
+  .hero-btns {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 1s 0.6s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── BUTTONS ── */
+  .btn-gold {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #b8860b, var(--gold), #c9a84c);
+    color: #1a0e00;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    padding: 13px 28px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(201,168,76,0.3), 0 4px 15px rgba(0,0,0,0.4);
+  }
+  .btn-gold::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.2) 50%, transparent 60%);
+    transform: translateX(-100%);
+    transition: transform 0.5s;
+  }
+  .btn-gold:hover::after { transform: translateX(100%); }
+  .btn-gold:hover { box-shadow: 0 0 35px rgba(201,168,76,0.5), 0 4px 20px rgba(0,0,0,0.5); transform: translateY(-2px); }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--blue);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    padding: 12px 28px;
+    border: 1px solid rgba(79,195,247,0.4);
+    border-radius: 3px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+    box-shadow: 0 0 15px rgba(79,195,247,0.1);
+  }
+  .btn-outline:hover {
+    background: rgba(79,195,247,0.1);
+    border-color: var(--blue);
+    box-shadow: 0 0 25px rgba(79,195,247,0.2);
+    transform: translateY(-2px);
+  }
+
+  /* ── SECTION BASE ── */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 80px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 5px;
+    color: var(--gold);
+    margin-bottom: 8px;
+    opacity: 0.7;
+  }
+  .section-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+  }
+  .section-title span { color: var(--blue); }
+  .divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+    margin-bottom: 40px;
+  }
+
+  /* ── PATCH SLIDE ── */
+  .slide-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid rgba(201,168,76,0.15);
+    box-shadow: 0 0 40px rgba(0,0,0,0.6);
+  }
+  .slides { display: flex; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+  .slide {
+    min-width: 100%;
+    padding: 50px 40px;
+    background: linear-gradient(135deg, var(--dark2), var(--dark3));
+    position: relative;
+    overflow: hidden;
+  }
+  .slide::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(79,195,247,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .slide-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--gold), #8a6820);
+    color: #1a0e00;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 4px 12px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .slide-badge.new { background: linear-gradient(135deg, var(--blue-glow), #003d5b); color: #e0f4ff; }
+  .slide h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    color: var(--gold-light);
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+  }
+  .slide-date {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+  .slide p {
+    color: var(--text);
+    font-size: 0.9rem;
+    line-height: 1.9;
+    max-width: 650px;
+  }
+  .slide-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  .slide-tag {
+    background: rgba(79,195,247,0.1);
+    color: var(--blue);
+    border: 1px solid rgba(79,195,247,0.2);
+    font-size: 0.73rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .slide-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .slide-btn {
+    width: 36px; height: 36px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold);
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .slide-btn:hover { background: rgba(201,168,76,0.2); transform: scale(1.1); }
+  .slide-dots { display: flex; gap: 8px; }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.3);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .dot.active { background: var(--gold); transform: scale(1.3); }
+
+  /* ── YOUTUBE ── */
+  .yt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .yt-card {
+    background: var(--dark2);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+  }
+  .yt-card:hover {
+    border-color: rgba(201,168,76,0.35);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.5), 0 0 20px rgba(201,168,76,0.08);
+  }
+  .yt-thumb {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: var(--dark3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .yt-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .yt-play {
+    position: absolute;
+    width: 50px; height: 50px;
+    background: rgba(255,0,0,0.85);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(255,0,0,0.4);
+    transition: transform 0.2s;
+  }
+  .yt-card:hover .yt-play { transform: scale(1.15); }
+  .yt-info { padding: 14px 16px; }
+  .yt-info h4 {
+    color: var(--text);
+    font-size: 0.88rem;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 6px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .yt-info span {
+    color: var(--text-dim);
+    font-size: 0.75rem;
+  }
+  .yt-more-btn {
+    margin-top: 30px;
+    text-align: center;
+  }
+
+  /* ── CLASSES ── */
+  .class-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .class-card {
+    background: linear-gradient(160deg, var(--dark2), var(--dark3));
+    border: 1px solid rgba(201,168,76,0.12);
+    border-radius: 8px;
+    padding: 28px 20px;
+    text-align: center;
+    transition: all 0.35s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .class-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    transform: scaleX(0);
+    transition: transform 0.35s;
+  }
+  .class-card:hover::after { transform: scaleX(1); }
+  .class-card:hover {
+    border-color: rgba(201,168,76,0.4);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5), 0 0 25px rgba(201,168,76,0.08);
+  }
+  .class-icon {
+    font-size: 2.8rem;
+    margin-bottom: 14px;
+    filter: drop-shadow(0 0 8px rgba(201,168,76,0.4));
+  }
+  .class-card h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+  }
+  .class-type {
+    display: inline-block;
+    font-size: 0.68rem;
+    letter-spacing: 2px;
+    color: var(--blue);
+    background: rgba(79,195,247,0.1);
+    border: 1px solid rgba(79,195,247,0.2);
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .class-card p {
+    color: var(--text-dim);
+    font-size: 0.78rem;
+    line-height: 1.7;
+    margin-top: 8px;
+  }
+
+  /* ── OFFICIAL LINKS ── */
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .link-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    padding: 30px 20px;
+    background: var(--dark2);
+    border: 1px solid rgba(201,168,76,0.1);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .link-card:hover {
+    border-color: rgba(201,168,76,0.4);
+    background: var(--dark3);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 20px rgba(201,168,76,0.08);
+  }
+  .link-icon {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem;
+  }
+  .link-card h3 {
+    color: var(--gold-light);
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+  }
+  .link-card p {
+    color: var(--text-dim);
+    font-size: 0.78rem;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .link-arrow {
+    font-size: 0.8rem;
+    color: var(--gold);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .link-card:hover .link-arrow { opacity: 1; }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 40px 20px;
+    border-top: 1px solid rgba(201,168,76,0.1);
+    color: var(--text-dim);
+    font-size: 0.78rem;
+    line-height: 2;
+  }
+  footer .logo-f {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    letter-spacing: 3px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+
+  /* ── SECTION DIVIDER ── */
+  .full-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,168,76,0.2), transparent);
+    margin: 0;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (max-width: 600px) {
+    .hero h1 { letter-spacing: 4px; }
+    nav a { font-size: 0.7rem; padding: 5px 8px; }
+    .slide { padding: 30px 22px; }
+    section { padding: 60px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PARTICLES -->
+<div id="particles"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="logo">아이온2 공략</div>
+    <nav>
+      <a href="#updates">업데이트</a>
+      <a href="#videos">공략</a>
+      <a href="#classes">직업</a>
+      <a href="#official">공식</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">NCSOFT — FANTASY MMORPG</div>
+  <h1>AION II</h1>
+  <h2>REBORN ETERNAL</h2>
+  <p>아이온2의 모든 것을 한 곳에서.<br>최신 패치, 직업 공략, 유튜브 영상까지 빠르게 확인하세요.</p>
+  <div class="hero-btns">
+    <a href="https://aion2.plaync.com" target="_blank" class="btn-gold">⚔ 공식 사이트 바로가기</a>
+    <a href="#updates" class="btn-outline">📋 최신 업데이트 보기</a>
+  </div>
+</div>
+
+<div class="full-divider"></div>
+
+<!-- PATCH NOTES SLIDE -->
+<section id="updates">
+  <div class="section-label">LATEST NEWS</div>
+  <div class="section-title">최신 <span>업데이트</span> / 패치노트</div>
+  <div class="divider"></div>
+
+  <div class="slide-wrapper">
+    <div class="slides" id="slides">
+
+      <div class="slide">
+        <div class="slide-badge new">NEW</div>
+        <div class="slide-date">2025. 04. 15</div>
+        <h3>시즌 1 메이저 업데이트</h3>
+        <p>새로운 대륙 "에테르 협곡"이 개방됩니다. 최대 레벨이 90으로 상향되며, 신규 레이드 던전 "타락한 성소"가 추가됩니다. 신규 직업 스킬 트리와 함께 기존 스킬 밸런스 패치도 적용됩니다.</p>
+        <div class="slide-tags">
+          <span class="slide-tag">신규 맵</span>
+          <span class="slide-tag">레벨캡 상향</span>
+          <span class="slide-tag">레이드 추가</span>
+          <span class="slide-tag">스킬 밸런스</span>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-badge">PATCH</div>
+        <div class="slide-date">2025. 04. 01</div>
+        <h3>4월 밸런스 패치</h3>
+        <p>검사 계열 직업의 방어력 스킬이 20% 상향 조정됩니다. 마법사 계열의 광역 스킬 쿨타임이 일부 조정되며, PvP 환경 개선을 위한 여러 직업 패치가 포함됩니다. 거래소 UI도 새롭게 개편됩니다.</p>
+        <div class="slide-tags">
+          <span class="slide-tag">직업 밸런스</span>
+          <span class="slide-tag">PvP 개선</span>
+          <span class="slide-tag">UI 개편</span>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-badge">EVENT</div>
+        <div class="slide-date">2025. 03. 22</div>
+        <h3>봄맞이 이벤트 & 코스튬</h3>
+        <p>벚꽃 시즌 한정 코스튬 "에테르 블라썸" 세트가 출시됩니다. 로그인 이벤트를 통해 강화석 패키지와 희귀 마운트를 획득할 수 있습니다. 이벤트 기간은 4월 30일까지입니다.</p>
+        <div class="slide-tags">
+          <span class="slide-tag">한정 코스튬</span>
+          <span class="slide-tag">로그인 보상</span>
+          <span class="slide-tag">신규 마운트</span>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-badge">UPDATE</div>
+        <div class="slide-date">2025. 03. 10</div>
+        <h3>길드 시스템 대규모 개편</h3>
+        <p>길드 레벨 최대치가 30으로 확장되고, 길드 전용 전투지역 "분쟁의 땅"이 새롭게 추가됩니다. 길드 기여도 보상 시스템도 전면 개편되어 더욱 다양한 보상을 획득할 수 있게 됩니다.</p>
+        <div class="slide-tags">
+          <span class="slide-tag">길드 시스템</span>
+          <span class="slide-tag">신규 전투지역</span>
+          <span class="slide-tag">보상 개편</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="slide-nav">
+    <button class="slide-btn" onclick="prevSlide()">‹</button>
+    <div class="slide-dots" id="dots"></div>
+    <button class="slide-btn" onclick="nextSlide()">›</button>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- YOUTUBE VIDEOS -->
+<section id="videos">
+  <div class="section-label">STRATEGY VIDEOS</div>
+  <div class="section-title">유튜브 <span>공략</span> 영상</div>
+  <div class="divider"></div>
+
+  <!-- 로딩 스피너 -->
+  <div id="yt-loading" style="text-align:center; padding: 60px 0;">
+    <div style="display:inline-block; width:40px; height:40px; border:3px solid rgba(201,168,76,0.2); border-top-color:var(--gold); border-radius:50%; animation:spin 0.8s linear infinite;"></div>
+    <p style="color:var(--text-dim); margin-top:16px; font-size:0.85rem;">영상 불러오는 중...</p>
+  </div>
+
+  <div class="yt-grid" id="yt-grid" style="display:none;"></div>
+
+  <div class="yt-more-btn" id="yt-more" style="display:none;">
+    <a href="https://www.youtube.com/results?search_query=아이온2+공략" target="_blank" class="btn-outline">
+      ▶ 유튜브에서 더 보기
+    </a>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- CLASSES -->
+<section id="classes">
+  <div class="section-label">CHOOSE YOUR PATH</div>
+  <div class="section-title"><span>직업</span> 소개</div>
+  <div class="divider"></div>
+
+  <div class="class-grid">
+
+    <div class="class-card">
+      <div class="class-icon">⚔️</div>
+      <h3>검사</h3>
+      <div class="class-type">WARRIOR</div>
+      <p>강력한 근접 전투와 두꺼운 방어로 파티의 전방을 책임지는 탱커 직업.</p>
+    </div>
+
+    <div class="class-card">
+      <div class="class-icon">🔮</div>
+      <h3>마법사</h3>
+      <div class="class-type">MAGE</div>
+      <p>에테르 에너지를 다루는 고화력 원거리 딜러. 광역 마법으로 전장을 지배.</p>
+    </div>
+
+    <div class="class-card">
+      <div class="class-icon">✨</div>
+      <h3>성직자</h3>
+      <div class="class-type">CLERIC</div>
+      <p>신성한 빛으로 아군을 치유하고 버프를 제공하는 서포터 전문 직업.</p>
+    </div>
+
+    <div class="class-card">
+      <div class="class-icon">🏹</div>
+      <h3>궁수</h3>
+      <div class="class-type">RANGER</div>
+      <p>원거리에서 정확한 화살로 적을 제압하는 민첩한 딜러 직업.</p>
+    </div>
+
+    <div class="class-card">
+      <div class="class-icon">🗡️</div>
+      <h3>암살자</h3>
+      <div class="class-type">ASSASSIN</div>
+      <p>은신과 기습으로 적의 허점을 노리는 고위험 고보상의 딜러 직업.</p>
+    </div>
+
+    <div class="class-card">
+      <div class="class-icon">🌿</div>
+      <h3>소환사</h3>
+      <div class="class-type">SUMMONER</div>
+      <p>에테르 정령을 소환해 함께 싸우는 독특한 멀티롤 직업.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- OFFICIAL LINKS -->
+<section id="official">
+  <div class="section-label">OFFICIAL LINKS</div>
+  <div class="section-title">공식 <span>바로가기</span></div>
+  <div class="divider"></div>
+
+  <div class="links-grid">
+
+    <a href="https://aion2.plaync.com" target="_blank" class="link-card">
+      <div class="link-icon">🌐</div>
+      <h3>공식 홈페이지</h3>
+      <p>아이온2 공식 사이트에서 최신 소식을 확인하세요.</p>
+      <div class="link-arrow">→ 바로가기</div>
+    </a>
+
+    <a href="https://aion2.plaync.com/board/update" target="_blank" class="link-card">
+      <div class="link-icon">📋</div>
+      <h3>공식 패치노트</h3>
+      <p>공식 업데이트 내역과 상세 패치노트를 확인하세요.</p>
+      <div class="link-arrow">→ 바로가기</div>
+    </a>
+
+    <a href="https://cafe.naver.com/aion2" target="_blank" class="link-card">
+      <div class="link-icon">☕</div>
+      <h3>공식 카페</h3>
+      <p>네이버 공식 카페에서 다양한 정보를 교류하세요.</p>
+      <div class="link-arrow">→ 바로가기</div>
+    </a>
+
+    <a href="https://www.youtube.com/results?search_query=아이온2+공식" target="_blank" class="link-card">
+      <div class="link-icon">▶️</div>
+      <h3>공식 유튜브</h3>
+      <p>공식 트레일러, 업데이트 영상을 유튜브에서 시청하세요.</p>
+      <div class="link-arrow">→ 바로가기</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo-f">AION II FAN SITE</div>
+  <p>이 사이트는 팬이 제작한 비공식 정보 사이트입니다.</p>
+  <p>AION II © NCSoft Corporation. All rights reserved.</p>
+</footer>
+
+<script>
+  // ── PARTICLES ──
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 80; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2.5 + 0.5;
+    s.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      animation-duration:${Math.random()*4+2}s;
+      animation-delay:${Math.random()*5}s;
+    `;
+    container.appendChild(s);
+  }
+
+  // ── SLIDE ──
+  let current = 0;
+  const slides = document.getElementById('slides');
+  const total = slides.children.length;
+  const dotsEl = document.getElementById('dots');
+
+  for (let i = 0; i < total; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goSlide(i);
+    dotsEl.appendChild(d);
+  }
+
+  function goSlide(n) {
+    current = (n + total) % total;
+    slides.style.transform = `translateX(-${current * 100}%)`;
+    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  function nextSlide() { goSlide(current + 1); }
+  function prevSlide() { goSlide(current - 1); }
+
+  // auto-play
+  setInterval(nextSlide, 5000);
+
+  // ── YOUTUBE API ──
+  const YT_API_KEY = 'AIzaSyBvP-Im1chvw08Rx6AINUBprWkNHTGIR1k';
+  const YT_QUERY = '아이온2 공략';
+
+  async function loadYouTubeVideos() {
+    try {
+      const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(YT_QUERY)}&type=video&maxResults=6&order=relevance&key=${YT_API_KEY}`;
+      const res = await fetch(url);
+      const data = await res.json();
+
+      if (!data.items || data.items.length === 0) throw new Error('no items');
+
+      const grid = document.getElementById('yt-grid');
+      grid.innerHTML = '';
+
+      data.items.forEach(item => {
+        const vid = item.id.videoId;
+        const title = item.snippet.title;
+        const channel = item.snippet.channelTitle;
+        const thumb = item.snippet.thumbnails.medium?.url || item.snippet.thumbnails.default?.url;
+        const date = item.snippet.publishedAt?.slice(0,10).replace(/-/g,'.');
+
+        const card = document.createElement('a');
+        card.href = `https://www.youtube.com/watch?v=${vid}`;
+        card.target = '_blank';
+        card.className = 'yt-card';
+        card.innerHTML = `
+          <div class="yt-thumb">
+            <img src="${thumb}" alt="${title}" loading="lazy">
+            <div class="yt-play">▶</div>
+          </div>
+          <div class="yt-info">
+            <h4>${title}</h4>
+            <span>📺 ${channel} · ${date}</span>
+          </div>`;
+        grid.appendChild(card);
+      });
+
+      document.getElementById('yt-loading').style.display = 'none';
+      grid.style.display = 'grid';
+      document.getElementById('yt-more').style.display = 'block';
+
+    } catch (e) {
+      // API 실패 시 기본 카드 표시
+      document.getElementById('yt-loading').innerHTML = `
+        <p style="color:var(--text-dim); font-size:0.85rem;">영상을 불러오지 못했어요.<br>
+        <a href="https://www.youtube.com/results?search_query=아이온2+공략" target="_blank" style="color:var(--gold);">유튜브에서 직접 검색하기 →</a></p>`;
+    }
+  }
+
+  loadYouTubeVideos();
+</script>
+</body>
+</html>
