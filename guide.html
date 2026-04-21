@@ -165,6 +165,20 @@
 
   .ad-area { text-align: center; padding: 20px 0; background: var(--dark2); margin: 20px 0; }
 
+  .filter-btn {
+    background: transparent;
+    border: 1px solid rgba(201,168,76,0.2);
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    padding: 6px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover { border-color: rgba(201,168,76,0.4); color: var(--text); }
+  .filter-btn.active { background: var(--gold); border-color: var(--gold); color: #1a0e00; font-weight: 700; }
+
   footer {
     text-align: center;
     padding: 30px;
@@ -216,9 +230,23 @@
     <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
   </div>
 
-  <div class="guide-grid">
+  <!-- 카테고리 필터 -->
+  <div style="max-width:1100px; margin:0 auto; padding:0 24px 24px;">
+    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+      <button class="filter-btn active" onclick="filterGuide('all', this)">전체 <span style="font-size:0.7rem; opacity:0.7;">14</span></button>
+      <button class="filter-btn" onclick="filterGuide('초보가이드', this)">초보 가이드</button>
+      <button class="filter-btn" onclick="filterGuide('클래스공략', this)">클래스 공략</button>
+      <button class="filter-btn" onclick="filterGuide('성장가이드', this)">성장 가이드</button>
+      <button class="filter-btn" onclick="filterGuide('이벤트공략', this)">이벤트 공략</button>
+      <button class="filter-btn" onclick="filterGuide('던전공략', this)">던전 공략</button>
+      <button class="filter-btn" onclick="filterGuide('시스템', this)">시스템</button>
+      <button class="filter-btn" onclick="filterGuide('패치', this)">패치 요약</button>
+    </div>
+  </div>
 
-    <div class="guide-card" onclick="showArticle('article1')">
+  <div class="guide-grid" id="guide-grid">
+
+    <div class="guide-card" data-category="초보가이드" onclick="showArticle('article1')">
       <div class="card-header">
         <span class="card-badge badge-blue">초보 가이드</span>
       </div>
@@ -232,7 +260,7 @@
       </div>
     </div>
 
-    <div class="guide-card" onclick="showArticle('article2')">
+    <div class="guide-card" data-category="클래스공략" onclick="showArticle('article2')">
       <div class="card-header">
         <span class="card-badge badge-gold">클래스 공략</span>
       </div>
@@ -246,7 +274,7 @@
       </div>
     </div>
 
-    <div class="guide-card" onclick="showArticle('article3')">
+    <div class="guide-card" data-category="성장가이드" onclick="showArticle('article3')">
       <div class="card-header">
         <span class="card-badge badge-green">성장 가이드</span>
       </div>
@@ -260,7 +288,7 @@
       </div>
     </div>
 
-    <div class="guide-card" onclick="showArticle('article4')">
+    <div class="guide-card" data-category="패치" onclick="showArticle('article4')">
       <div class="card-header">
         <span class="card-badge badge-red">패치 요약</span>
       </div>
@@ -274,7 +302,7 @@
       </div>
     </div>
 
-    <div class="guide-card" onclick="showArticle('article5')">
+    <div class="guide-card" data-category="이벤트공략" onclick="showArticle('article5')">
       <div class="card-header">
         <span class="card-badge badge-gold">이벤트 공략</span>
       </div>
@@ -288,13 +316,125 @@
       </div>
     </div>
 
-    <div class="guide-card" onclick="showArticle('article6')">
+    <div class="guide-card" data-category="던전공략" onclick="showArticle('article6')">
       <div class="card-header">
         <span class="card-badge badge-blue">던전 공략</span>
       </div>
       <div class="card-body">
         <h2>원정 던전 입문 가이드 — 처음이라면 꼭 읽기</h2>
         <p class="summary">원정 던전을 처음 시작하는 분들을 위한 기본 가이드입니다. 입장 조건, 준비물, 기본 공략법을 정리했어요.</p>
+        <div class="card-meta">
+          <span class="card-date">2026.04.21</span>
+          <span class="card-read">읽기 →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-card" data-category="클래스공략" onclick="showArticle('article7')">
+      <div class="card-header">
+        <span class="card-badge badge-gold">클래스 공략</span>
+      </div>
+      <div class="card-body">
+        <h2>살성 클래스 완벽 공략 — 은신과 암습의 달인</h2>
+        <p class="summary">살성은 은신을 활용한 암습 딜러입니다. 시즌3에서 대폭 버프를 받은 살성의 스킬 특화와 전투 전략을 정리했어요.</p>
+        <div class="card-meta">
+          <span class="card-date">2026.04.21</span>
+          <span class="card-read">읽기 →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-card" data-category="클래스공략" onclick="showArticle('article8')">
+      <div class="card-header">
+        <span class="card-badge badge-blue">클래스 공략</span>
+      </div>
+      <div class="card-body">
+        <h2>치유성 클래스 공략 — 파티의 생명줄</h2>
+        <p class="summary">시즌3에서 가장 크게 변경된 치유성 공략입니다. 단죄·대지의 징벌 상향과 불사의 장막 자기 부활 활용법을 정리했어요.</p>
+        <div class="card-meta">
+          <span class="card-date">2026.04.21</span>
+          <span class="card-read">읽기 →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-card" data-category="클래스공략" onclick="showArticle('article9')">
+      <div class="card-header">
+        <span class="card-badge badge-green">클래스 공략</span>
+      </div>
+      <div class="card-body">
+        <h2>수호성 클래스 공략 — 파티를 지키는 철벽 탱커</h2>
+        <p class="summary">수호성은 파티의 생존을 책임지는 탱커입니다. 심판 스킬 활용과 파멸의 방패 연계 플레이를 상세히 정리했어요.</p>
+        <div class="card-meta">
+          <span class="card-date">2026.04.21</span>
+          <span class="card-read">읽기 →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-card" data-category="시스템" onclick="showArticle('article10')">
+      <div class="card-header">
+        <span class="card-badge badge-red">시스템 가이드</span>
+      </div>
+      <div class="card-body">
+        <h2>장비 강화·돌파 완벽 가이드 — 실패 없이 올리는 법</h2>
+        <p class="summary">강화석으로 장비를 올리는 방법과 돌파 시스템을 정리했습니다. 강화 실패를 최소화하는 팁도 함께 알려드려요.</p>
+        <div class="card-meta">
+          <span class="card-date">2026.04.21</span>
+          <span class="card-read">읽기 →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-card" data-category="시스템" onclick="showArticle('article11')">
+      <div class="card-header">
+        <span class="card-badge badge-gold">시스템 가이드</span>
+      </div>
+      <div class="card-body">
+        <h2>데바니온 성장 가이드 — 아리엘·마르쿠탄·유스티엘</h2>
+        <p class="summary">데바니온은 캐릭터 전투력을 크게 높여주는 핵심 시스템입니다. 어떤 데바니온을 먼저 키워야 할지 우선순위를 정리했어요.</p>
+        <div class="card-meta">
+          <span class="card-date">2026.04.21</span>
+          <span class="card-read">읽기 →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-card" data-category="던전공략" onclick="showArticle('article12')">
+      <div class="card-header">
+        <span class="card-badge badge-blue">콘텐츠 공략</span>
+      </div>
+      <div class="card-body">
+        <h2>슈고 페스타 완벽 공략 — 보상 최대로 받는 법</h2>
+        <p class="summary">슈고 페스타는 시간대에 맞춰 참여해야 하는 이벤트입니다. 각 미니게임별 공략과 보상 극대화 방법을 정리했어요.</p>
+        <div class="card-meta">
+          <span class="card-date">2026.04.21</span>
+          <span class="card-read">읽기 →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-card" data-category="시스템" onclick="showArticle('article13')">
+      <div class="card-header">
+        <span class="card-badge badge-red">콘텐츠 공략</span>
+      </div>
+      <div class="card-body">
+        <h2>어비스 입문 가이드 — 시즌3 개편 완벽 정리</h2>
+        <p class="summary">시즌3에서 대규모 개편된 어비스 시스템을 정리했습니다. 혼돈의 에레슈란타 중층과 어비스 장비 잠재력 강화까지 안내해요.</p>
+        <div class="card-meta">
+          <span class="card-date">2026.04.21</span>
+          <span class="card-read">읽기 →</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="guide-card" data-category="성장가이드" onclick="showArticle('article14')">
+      <div class="card-header">
+        <span class="card-badge badge-green">시스템 가이드</span>
+      </div>
+      <div class="card-body">
+        <h2>펫 시스템 완벽 가이드 — 시즌3 경험치 하향 이후</h2>
+        <p class="summary">시즌3에서 경험치가 70%로 하향된 펫 시스템을 정리했습니다. 종족 이해도 프리셋 활용법과 효율적인 펫 성장법을 안내해요.</p>
         <div class="card-meta">
           <span class="card-date">2026.04.21</span>
           <span class="card-read">읽기 →</span>
@@ -601,6 +741,315 @@
   <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
 </div>
 
+<!-- 상세 글 7 살성 -->
+<div id="article7" class="article-section">
+  <div class="container">
+    <button class="article-back" onclick="showList()">← 목록으로</button>
+    <div class="article-label">클래스 공략</div>
+    <h1 class="article-title">살성 클래스 완벽 공략 — 은신과 암습의 달인</h1>
+    <div class="article-date">2026년 4월 21일</div>
+    <div class="article-body">
+      <p>살성(Assassin)은 은신을 활용한 암습 딜러 클래스입니다. 시즌3 패치에서 환영 분신 속도 30% 상향, 각오 발동 조건 완화 등 대폭 버프를 받았어요. 조작이 다소 복잡하지만 숙련되면 최고의 딜을 뽑을 수 있습니다.</p>
+      <h3>살성의 특징</h3>
+      <ul>
+        <li>은신 상태에서 강력한 선제 암습 가능</li>
+        <li>단일 대상 최고 수준의 딜 출력</li>
+        <li>그림자 보행으로 순간 이동 및 포지셔닝</li>
+        <li>시즌3에서 환영 분신·신속의 계약 속도 30% 상향</li>
+      </ul>
+      <h3>핵심 스킬 활용</h3>
+      <table class="article-table">
+        <tr><th>스킬</th><th>주요 특화</th><th>역할</th></tr>
+        <tr><td>그림자 보행</td><td>3번 특화</td><td>PC 처치 관여 시 쿨타임 초기화</td></tr>
+        <tr><td>환영 분신</td><td>기본 기능</td><td>심장 찌르기 쿨타임 삭제 추가</td></tr>
+        <tr><td>맹수의 송곳니</td><td>4번 특화</td><td>확정 치명타</td></tr>
+        <tr><td>각오</td><td>패시브</td><td>생명력 30% 이하 대상 강화 딜</td></tr>
+      </table>
+      <div class="tip">💡 시즌3에서 은신 중 버프 사용해도 은신이 해제되지 않도록 개선됐어요! 더 안정적인 플레이가 가능합니다.</div>
+      <h3>전투 순서 (콤보)</h3>
+      <ul>
+        <li>은신 진입 → 암습 선제 공격</li>
+        <li>환영 분신 → 심장 찌르기 즉시 연계</li>
+        <li>그림자 보행으로 재포지셔닝</li>
+        <li>맹수의 송곳니 → 확정 치명타 활용</li>
+      </ul>
+      <div class="warn">⚠️ 살성은 생존력이 낮아요. 보스 패턴을 정확히 파악하고 회피 타이밍을 익히는 게 중요합니다!</div>
+    </div>
+  </div>
+</div>
+
+<!-- 상세 글 8 치유성 -->
+<div id="article8" class="article-section">
+  <div class="container">
+    <button class="article-back" onclick="showList()">← 목록으로</button>
+    <div class="article-label">클래스 공략</div>
+    <h1 class="article-title">치유성 클래스 공략 — 파티의 생명줄</h1>
+    <div class="article-date">2026년 4월 21일</div>
+    <div class="article-body">
+      <p>치유성(Cleric)은 파티의 힐러 역할을 담당하는 클래스입니다. 시즌3에서 가장 많은 변경을 받은 클래스로 딜과 힐을 동시에 할 수 있는 강력한 하이브리드 클래스가 됐어요.</p>
+      <h3>시즌3 주요 변경사항</h3>
+      <table class="article-table">
+        <tr><th>스킬</th><th>변경 내용</th></tr>
+        <tr><td>대지의 징벌</td><td>피해량 30% 상향, 2번 특화 강타 저항 7% 감소로 변경</td></tr>
+        <tr><td>단죄</td><td>스킬 모션 빠르게 변경, 피해량 30% 상향</td></tr>
+        <tr><td>불사의 장막</td><td>사망 시 자기 부활 효과 추가 (쿨타임 3분)</td></tr>
+        <tr><td>보호의 빛</td><td>자기 부활 효과 제거 (불사의 장막으로 이전)</td></tr>
+        <tr><td>주신의 은총</td><td>강타 스탯 증가 추가, 피해량 30% 상향</td></tr>
+      </table>
+      <div class="tip">💡 불사의 장막의 자기 부활은 솔플 시 매우 강력해요! 쿨타임 3분이니 위험할 때 아껴두세요.</div>
+      <h3>힐러로서의 우선순위</h3>
+      <ul>
+        <li>탱커 HP 유지가 최우선</li>
+        <li>부활의 정령석 항상 보유</li>
+        <li>대지의 은총은 발동 조건 삭제로 항상 사용 가능</li>
+        <li>파티원 사망 시 즉시 부활 스킬 사용</li>
+      </ul>
+      <h3>딜 치유성 빌드</h3>
+      <p>치유성의 딜이 대폭 상향되어 딜 위주 빌드도 가능해졌습니다. 솔플이나 DPS가 충분한 파티에서 활용해보세요.</p>
+      <ul>
+        <li>대지의 징벌·단죄 중심 딜 로테이션</li>
+        <li>벽력 4번 특화 — 대상 수 적을수록 피해 증가 활용</li>
+        <li>약화의 낙인·고통의 연쇄 20% 상향 활용</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 상세 글 9 수호성 -->
+<div id="article9" class="article-section">
+  <div class="container">
+    <button class="article-back" onclick="showList()">← 목록으로</button>
+    <div class="article-label">클래스 공략</div>
+    <h1 class="article-title">수호성 클래스 공략 — 파티를 지키는 철벽 탱커</h1>
+    <div class="article-date">2026년 4월 21일</div>
+    <div class="article-body">
+      <p>수호성(Guardian)은 방패로 파티를 보호하는 탱커 클래스입니다. 높은 방어력과 생존력으로 파티의 최전선을 담당해요. 초보자에게 가장 추천하는 클래스 중 하나입니다.</p>
+      <h3>수호성의 특징</h3>
+      <ul>
+        <li>파티 내 최고 수준의 방어력과 생존력</li>
+        <li>어그로 관리 스킬 다수 보유</li>
+        <li>막기·회피 스킬로 보스 패턴 무력화</li>
+        <li>시즌3에서 파멸의 방패 심판 활성화 추가</li>
+      </ul>
+      <h3>시즌3 주요 변경</h3>
+      <table class="article-table">
+        <tr><th>스킬</th><th>변경 내용</th></tr>
+        <tr><td>파멸의 방패</td><td>적중 시 대상에게 7초간 심판 활성화</td></tr>
+        <tr><td>심판</td><td>적대치 증가 효과 미적용 버그 수정</td></tr>
+        <tr><td>막기 계열</td><td>막기 유지 시간이 전투 속도 영향 받던 현상 수정</td></tr>
+      </table>
+      <div class="tip">💡 파멸의 방패 → 심판 연계로 어그로를 효과적으로 유지하세요! 시즌3 수호성의 핵심 콤보예요.</div>
+      <h3>탱커로서 해야 할 것</h3>
+      <ul>
+        <li>보스와 항상 가까이 붙어 어그로 유지</li>
+        <li>막기 스킬로 보스 강공격 무력화</li>
+        <li>파티원이 보스 뒤에 위치하도록 포지셔닝</li>
+        <li>힐러의 HP 회복을 믿고 공격적으로 어그로 관리</li>
+      </ul>
+      <h3>추천 장비 방향</h3>
+      <ul>
+        <li>방어구 — 생명력·방어력 최우선</li>
+        <li>무기 — 어그로 증가 옵션 위주</li>
+        <li>어비스 장비 — 잠재력 강화로 PvP 방어력 증가</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 상세 글 10 장비 강화 -->
+<div id="article10" class="article-section">
+  <div class="container">
+    <button class="article-back" onclick="showList()">← 목록으로</button>
+    <div class="article-label">시스템 가이드</div>
+    <h1 class="article-title">장비 강화·돌파 완벽 가이드 — 실패 없이 올리는 법</h1>
+    <div class="article-date">2026년 4월 21일</div>
+    <div class="article-body">
+      <p>아이온2의 장비 강화 시스템은 처음에는 복잡해 보이지만 규칙을 이해하면 효율적으로 진행할 수 있습니다. 강화·돌파·계승까지 한번에 정리해드립니다.</p>
+      <h3>장비 강화란?</h3>
+      <p>강화석을 사용해 장비의 수치를 올리는 시스템입니다. +1부터 시작해 단계별로 올릴 수 있어요.</p>
+      <table class="article-table">
+        <tr><th>강화 단계</th><th>특징</th><th>권장 방법</th></tr>
+        <tr><td>+1 ~ +6</td><td>실패 없음</td><td>자유롭게 강화</td></tr>
+        <tr><td>+7 ~ +10</td><td>실패 시 하락 없음</td><td>강화석 충분히 준비</td></tr>
+        <tr><td>+11 ~ +15</td><td>실패 시 단계 하락</td><td>봉혼석으로 보호 추천</td></tr>
+      </table>
+      <div class="warn">⚠️ +12 이상 강화 시 실패하면 강화 단계가 내려가요! 봉혼석을 사용해 보호하는 것을 강력 추천합니다.</div>
+      <h3>돌파 시스템</h3>
+      <p>돌파는 장비를 한 단계 높은 등급으로 올리는 시스템입니다. 유일 → 영웅 등급으로 상승할 수 있어요.</p>
+      <ul>
+        <li>돌파석 조각 일정 수량 필요</li>
+        <li>돌파 성공 시 장비 외형은 유지, 스탯 대폭 상승</li>
+        <li>시즌3 신규 — 상급 계승으로 유일→영웅 계승 가능</li>
+      </ul>
+      <h3>계승 제작 (시즌3 신규)</h3>
+      <p>기존 장비의 강화·돌파 단계와 영혼 각인 정보를 새 장비에 물려주는 시스템입니다.</p>
+      <div class="tip">💡 강화를 많이 한 장비를 버리지 마세요! 계승 제작으로 새 장비에 강화 수치를 이전할 수 있어요.</div>
+      <h3>강화석 효율적으로 모으는 법</h3>
+      <ul>
+        <li>데바 패스 보상 — 레벨당 5000개</li>
+        <li>원정·초월 던전 드롭</li>
+        <li>슈고의 성장 부스팅 미션 보상</li>
+        <li>물질 변환 — 여분 아이템 강화석으로 변환</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 상세 글 11 데바니온 -->
+<div id="article11" class="article-section">
+  <div class="container">
+    <button class="article-back" onclick="showList()">← 목록으로</button>
+    <div class="article-label">시스템 가이드</div>
+    <h1 class="article-title">데바니온 성장 가이드 — 아리엘·마르쿠탄·유스티엘</h1>
+    <div class="article-date">2026년 4월 21일</div>
+    <div class="article-body">
+      <p>데바니온은 캐릭터에게 강력한 추가 능력치를 부여하는 핵심 시스템입니다. 어떤 데바니온을 먼저 키워야 할지 우선순위를 정리했어요.</p>
+      <h3>데바니온이란?</h3>
+      <p>데바니온은 각인 아이템인 '데바니온 결정'을 모아 포인트를 투자해 성장시키는 시스템입니다. 투자한 포인트에 따라 능력치가 올라가요.</p>
+      <h3>시즌3 데바니온 우선순위</h3>
+      <table class="article-table">
+        <tr><th>데바니온</th><th>획득처</th><th>추천도</th></tr>
+        <tr><td>아리엘</td><td>데바 패스, 각성전 보상</td><td>★★★ 최우선</td></tr>
+        <tr><td>마르쿠탄</td><td>원정 정복, 초월 던전</td><td>★★★ 최우선</td></tr>
+        <tr><td>유스티엘 (신규)</td><td>환영의 회랑, 신규 초월</td><td>★★☆ 시즌3 추가</td></tr>
+        <tr><td>아스펠</td><td>물질 변환</td><td>★☆☆ 여유 있을 때</td></tr>
+      </table>
+      <div class="tip">💡 마르쿠탄 부스팅 이벤트가 7월 1일까지 진행 중! 지금이 마르쿠탄 데바니온 키우기 최적의 시기예요.</div>
+      <h3>데바니온 결정 효율적으로 모으는 법</h3>
+      <ul>
+        <li>아리엘 결정 — 데바 패스 레벨업 보상, 각성전</li>
+        <li>마르쿠탄 결정 — 원정 정복 (죽은 드라마타의 둥지, 무의 요람), 초월 (가라앉은 생명의 신전)</li>
+        <li>유스티엘 결정 — 환영의 회랑 원정에서 획득 가능</li>
+        <li>물질 변환 — 영혼의 서를 통해 추가 획득 가능</li>
+      </ul>
+      <h3>만신전 프리셋 (시즌3 신규)</h3>
+      <p>시즌3에서 만신전 프리셋이 추가됐습니다. 프리셋별로 다른 장식품을 장착할 수 있어요.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 상세 글 12 슈고 페스타 -->
+<div id="article12" class="article-section">
+  <div class="container">
+    <button class="article-back" onclick="showList()">← 목록으로</button>
+    <div class="article-label">콘텐츠 공략</div>
+    <h1 class="article-title">슈고 페스타 완벽 공략 — 보상 최대로 받는 법</h1>
+    <div class="article-date">2026년 4월 21일</div>
+    <div class="article-body">
+      <p>슈고 페스타는 일정 시간에 열리는 이벤트형 콘텐츠입니다. 시즌3에서 대폭 개편되어 더 다양한 미니게임과 보상이 추가됐어요.</p>
+      <h3>슈고 페스타 시간표</h3>
+      <table class="article-table">
+        <tr><th>시간</th><th>이벤트</th></tr>
+        <tr><td>짝수 시간 정각 (예: 2시)</td><td>슈고 페스타</td></tr>
+        <tr><td>홀수 시간 정각 (예: 1시)</td><td>슈고 페스타</td></tr>
+        <tr><td>매시 30분</td><td>차원 침공</td></tr>
+      </table>
+      <div class="tip">💡 시즌3에서 슈고 페스타 시간이 변경됐어요! 짝수·홀수 시간 정각에 열립니다.</div>
+      <h3>주요 미니게임 공략</h3>
+      <ul>
+        <li><strong>높이높이</strong> — 이동 경로 개선됨. 장애물 피하며 최대한 높이 올라가기</li>
+        <li><strong>오드 방울 수집</strong> — 생성 경로 수정됨. 루기와 슈고 공유 방울 주의</li>
+        <li><strong>슈고 상인 보호</strong> — 기여도 100점 이상 시 보상 2회 (구독 시 4회)</li>
+        <li><strong>골드린의 보물</strong> — 일부 보물이 랜덤 위치로 변경</li>
+        <li><strong>팡팡팡</strong> — 연속 발사 특별 지원품 오브젝트 활용</li>
+      </ul>
+      <h3>보상 극대화 방법</h3>
+      <ul>
+        <li>보상 열쇠 주간 7회 기본 (구독 시 14회)</li>
+        <li>슈고 페스타 보상 열쇠 아이템으로 추가 충전 가능 (최대 30회)</li>
+        <li>차원 침공 기여도 100점 이상 시 보상 3회</li>
+        <li>슈고 상인 보호·차원 침공 기여도 100점 미만 시 보상 없음 주의!</li>
+      </ul>
+      <div class="warn">⚠️ 기여도 100점 미만이면 보상을 받을 수 없어요! 적극적으로 참여해서 기여도를 채우세요.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 상세 글 13 어비스 -->
+<div id="article13" class="article-section">
+  <div class="container">
+    <button class="article-back" onclick="showList()">← 목록으로</button>
+    <div class="article-label">콘텐츠 공략</div>
+    <h1 class="article-title">어비스 입문 가이드 — 시즌3 개편 완벽 정리</h1>
+    <div class="article-date">2026년 4월 21일</div>
+    <div class="article-body">
+      <p>어비스는 PvP와 PvE가 혼재하는 아이온2의 특수 전투 지역입니다. 시즌3에서 대규모 개편이 이루어졌으니 변경사항을 꼭 확인하세요.</p>
+      <h3>시즌3 주요 개편 내용</h3>
+      <ul>
+        <li>핫스팟 완전 삭제</li>
+        <li>에레슈란타 중층 삭제 → 혼돈의 에레슈란타 중층 추가 (비행 불가)</li>
+        <li>어비스 장비 잠재력 강화 시스템 추가</li>
+        <li>서버 리매칭 시스템 도입</li>
+      </ul>
+      <div class="warn">⚠️ 기존 에레슈란타 중층 지령서 아이템은 37,500키나에 상점 판매 가능합니다!</div>
+      <h3>혼돈의 에레슈란타 중층</h3>
+      <ul>
+        <li>4/15 패치에서 바람길 추가, 낙사 판정 고도 대폭 상향</li>
+        <li>비행 불가 — 지상 전투만 가능</li>
+        <li>아티팩트 점령전 진행</li>
+        <li>분노한 수호신장 나흐마 출현</li>
+      </ul>
+      <h3>어비스 장비 잠재력 강화</h3>
+      <p>시즌3 신규 시스템으로 어비스 장비에 PvP 능력치를 추가할 수 있어요.</p>
+      <table class="article-table">
+        <tr><th>장비 종류</th><th>효과</th><th>최대 단계</th></tr>
+        <tr><td>무기·가더</td><td>PvP 피해 증폭 2.5%씩 추가</td><td>4단계 (총 10%)</td></tr>
+        <tr><td>방어구</td><td>PvP 피해 내성 0.5%씩 추가</td><td>4단계 (총 2%)</td></tr>
+        <tr><td>장신구</td><td>PvP 피해 증폭 0.5%씩 추가</td><td>4단계 (총 2%)</td></tr>
+      </table>
+      <h3>어비스 포인트 효율 올리기</h3>
+      <ul>
+        <li>전장 승리 보상 — 주간 3회 (3000 어비스 포인트)</li>
+        <li>투기장 승리 보상 — 주간 30회 (500 어비스 포인트)</li>
+        <li>시즌 랭킹 등급 올리면 더 많은 포인트 획득</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 상세 글 14 펫 시스템 -->
+<div id="article14" class="article-section">
+  <div class="container">
+    <button class="article-back" onclick="showList()">← 목록으로</button>
+    <div class="article-label">시스템 가이드</div>
+    <h1 class="article-title">펫 시스템 완벽 가이드 — 시즌3 경험치 하향 이후</h1>
+    <div class="article-date">2026년 4월 21일</div>
+    <div class="article-body">
+      <p>펫은 단순한 외형 아이템이 아닌 실제 전투력에 영향을 주는 핵심 시스템입니다. 시즌3에서 경험치가 70%로 하향되어 이전보다 성장이 빠르게 가능해졌어요.</p>
+      <h3>시즌3 변경사항</h3>
+      <ul>
+        <li>펫 및 종족 이해도 레벨별 필요 경험치 기존 대비 70%로 하향</li>
+        <li>종족 이해도 프리셋 시스템 추가 (최대 3개 프리셋)</li>
+        <li>기존 보유 분석 효과는 1번 프리셋에 자동 저장</li>
+        <li>경험치 하향으로 일부 업적 자동 달성</li>
+      </ul>
+      <div class="tip">💡 시즌3 업데이트 후 접속하면 펫 레벨이 자동으로 오를 수 있어요. 초과분은 종족 영혼 결정 포인트로 지급됩니다!</div>
+      <h3>종족 이해도 프리셋 활용법</h3>
+      <p>프리셋별로 다른 분석 효과를 설정해두고 상황에 따라 즉시 교체할 수 있어요.</p>
+      <ul>
+        <li>프리셋 1 — PvE 최적화 세팅</li>
+        <li>프리셋 2 — PvP 최적화 세팅</li>
+        <li>프리셋 3 — 레이드/파티 특화 세팅</li>
+      </ul>
+      <h3>추천 펫 목록 (시즌3)</h3>
+      <table class="article-table">
+        <tr><th>펫</th><th>특징</th><th>획득 방법</th></tr>
+        <tr><td>삐약이 (신규)</td><td>귀여운 병아리 펫</td><td>시즌3 상점</td></tr>
+        <tr><td>찬란한 황금 유니콘 (신규)</td><td>화려한 외형</td><td>시즌3 상점</td></tr>
+        <tr><td>심연의 그림자 유니콘 (신규)</td><td>다크한 외형</td><td>시즌3 상점</td></tr>
+        <tr><td>도도냥</td><td>그래픽 리소스 개선됨</td><td>기존 펫</td></tr>
+      </table>
+      <h3>펫 성장 효율 팁</h3>
+      <ul>
+        <li>영혼 결정 아이템 꾸준히 획득</li>
+        <li>종족 이해도 분석 — 이해도 레벨 오를 때마다 실행</li>
+        <li>데바 패스 보상으로 신비한 펫 상자 획득 가능</li>
+        <li>히든 큐브 — 신비한 펫 상자 획득 확률 있음</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
 <footer>
   <p>아이온2 공략 — 비공식 팬사이트 |
     <a href="index.html">메인</a>
@@ -621,6 +1070,17 @@ function showList() {
   document.getElementById('guide-list').style.display = 'block';
   document.querySelectorAll('.article-section').forEach(el => el.classList.remove('active'));
   window.scrollTo(0, 0);
+}
+function filterGuide(category, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.guide-card').forEach(card => {
+    if (category === 'all' || card.dataset.category === category) {
+      card.style.display = 'block';
+    } else {
+      card.style.display = 'none';
+    }
+  });
 }
 </script>
 
